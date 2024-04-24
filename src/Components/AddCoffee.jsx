@@ -1,8 +1,29 @@
 const AddCoffee = () => {
+  const handleAddNewCoffee = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const quantity = form.quantity.value;
+    const chefname = form.chefname.value;
+    const supplier = form.supplier.value;
+    const category = form.category.value;
+    const details = form.details.value;
+    const photourl = form.photourl.value;
+    const fieldData = {
+      name,
+      quantity,
+      chefname,
+      supplier,
+      category,
+      details,
+      photourl,
+    };
+    console.log(fieldData);
+  };
   return (
     <div>
       <h1 className="text-center text-3xl text-purple-700">Add New Coffee</h1>
-      <form>
+      <form onSubmit={handleAddNewCoffee}>
         {/*! row */}
         <div className="md:flex ms-12 me-12">
           <div className="form-control md:w-1/2">
@@ -35,7 +56,7 @@ const AddCoffee = () => {
               <span className="label-text text-xl">Chef Name</span>
             </div>
             <input
-              name="chef"
+              name="chefname"
               type="text"
               placeholder="Chef Name"
               className="input input-bordered w-full "
@@ -60,7 +81,7 @@ const AddCoffee = () => {
               <span className="label-text text-xl">Category</span>
             </div>
             <input
-              name="Category"
+              name="category"
               type="text"
               placeholder="Category"
               className="input input-bordered w-full "
@@ -72,7 +93,7 @@ const AddCoffee = () => {
             </div>
             <input
               type="text"
-              name="Details"
+              name="details"
               placeholder="Details"
               className="input input-bordered w-full"
             />
@@ -90,7 +111,7 @@ const AddCoffee = () => {
           />
         </div>
         <input
-          className="btn btn-block mt-6"
+          className="btn btn-block  ms-14 m-4 w-11/12"
           type="submit"
           value="Add Coffee"
         />
