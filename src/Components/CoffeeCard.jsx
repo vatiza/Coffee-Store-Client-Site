@@ -1,10 +1,53 @@
 import { CiEdit } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee }) => {
-  const { name, quantity, chefname, supplier, category, details, photourl } =
-    coffee;
+  const {
+    _id,
+    name,
+    quantity,
+    chefname,
+    supplier,
+    category,
+    details,
+    photourl,
+  } = coffee;
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //   Swal.fire({
+        //     title: "Deleted!",
+        //     text: "Your file has been deleted.",
+        //     icon: "success"
+        //   });
+        fetch(`http://localhost:5000/coffee/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Coffee has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
   return (
     <div className="card card-side bg-base-100 shadow-xl">
       <figure>
@@ -19,9 +62,20 @@ const CoffeeCard = ({ coffee }) => {
         </div>
         <div className="card-actions justify-end">
           <div className="join join-vertical space-y-3">
-            <button className="btn join-item"><FaEye className="w-6"></FaEye></button>
-            <button className="btn join-item"><CiEdit></CiEdit></button>
-            <button className="btn join-item"><MdDelete></MdDelete></button>
+            <button className="btn join-item">
+              <FaEye className="w-6"></FaEye>
+            </button>
+            <button className="btn join-item">
+              <CiEdit></CiEdit>
+            </button>
+            <button
+              onClick={() => {
+                handleDelete(_id);
+              }}
+              className="btn join-item bg-red-600 hover:bg-red-800  "
+            >
+              <MdDelete></MdDelete>
+            </button>
           </div>
         </div>
       </div>

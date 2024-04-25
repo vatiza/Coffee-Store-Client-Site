@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import "./App.css";
 import CoffeeCard from "./Components/CoffeeCard";
 
