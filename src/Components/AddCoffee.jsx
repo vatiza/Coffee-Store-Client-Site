@@ -1,4 +1,7 @@
+import useTitle from "./UseHooks";
+
 const AddCoffee = () => {
+  useTitle("Add New Coffee");
   const handleAddNewCoffee = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -9,7 +12,7 @@ const AddCoffee = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photourl = form.photourl.value;
-    const fieldData = {
+    const newCoffee = {
       name,
       quantity,
       chefname,
@@ -18,7 +21,16 @@ const AddCoffee = () => {
       details,
       photourl,
     };
-    console.log(fieldData);
+    console.log(newCoffee);
+    fetch("http://localhost:5000/coffee", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
   return (
     <div>
@@ -111,9 +123,9 @@ const AddCoffee = () => {
           />
         </div>
         <input
-          className="btn btn-block  ms-14 m-4 w-11/12"
+          className="btn btn-outline  ms-14 m-4 w-11/12"
           type="submit"
-          value="Add Coffee"
+          value="Add New Coffee"
         />
       </form>
     </div>
