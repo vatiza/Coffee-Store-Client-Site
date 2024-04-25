@@ -1,5 +1,5 @@
 import useTitle from "./UseHooks";
-
+import Swal from "sweetalert2";
 const AddCoffee = () => {
   useTitle("Add New Coffee");
   const handleAddNewCoffee = (event) => {
@@ -30,8 +30,18 @@ const AddCoffee = () => {
       body: JSON.stringify(newCoffee),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
-     
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Succefully Add New Coffee",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
+        form.reset();
+      });
   };
   return (
     <div>
