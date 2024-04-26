@@ -22,6 +22,8 @@ function App() {
           Add New Coffee
         </Link>
         <Link className="btn btn-outline" to="/updateCoffee">
+      
+
           Update Coffee
         </Link>
       </div> */}

@@ -1,6 +1,7 @@
 import { CiEdit } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee }) => {
@@ -66,7 +67,9 @@ const CoffeeCard = ({ coffee }) => {
               <FaEye className="w-6"></FaEye>
             </button>
             <button className="btn join-item">
-              <CiEdit></CiEdit>
+              <Link to={`/updateCoffee/${_id}`}>
+                <CiEdit></CiEdit>
+              </Link>
             </button>
             <button
               onClick={() => {
