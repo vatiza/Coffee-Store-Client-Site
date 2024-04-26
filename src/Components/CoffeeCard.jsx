@@ -4,15 +4,14 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const {
     _id,
     name,
     quantity,
-    chefname,
     supplier,
     category,
-    details,
+
     photourl,
   } = coffee;
   const handleDelete = (id) => {
@@ -44,6 +43,8 @@ const CoffeeCard = ({ coffee }) => {
                 text: "Your Coffee has been deleted.",
                 icon: "success",
               });
+              const remaning = coffees.filter((cof) => cof._id !== _id);
+              setCoffees(remaning);
             }
           });
       }
